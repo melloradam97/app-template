@@ -9,35 +9,24 @@ const UserInfo = () => {
   const currentUser = useCurrentUser()
   const [logoutMutation] = useMutation(logout)
 
-  if (currentUser) {
-    return (
-      <>
-        <Button
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </Button>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <Link href={Routes.SignupPage()}>
-          <strong>Sign Up</strong>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <strong>Login</strong>
-        </Link>
-      </>
-    )
-  }
+  if (!currentUser) return null
+
+  return (
+    <>
+      <Button
+        onClick={async () => {
+          await logoutMutation()
+        }}
+      >
+        Logout
+      </Button>
+      <div>
+        User id: <code>{currentUser.id}</code>
+        <br />
+        User role: <code>{currentUser.role}</code>
+      </div>
+    </>
+  )
 }
 
 export default UserInfo
