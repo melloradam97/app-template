@@ -3,6 +3,7 @@ import { useMutation } from "@blitzjs/rpc"
 import Link from "next/link"
 import logout from "@/features/auth/mutations/logout"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
+import { Button } from "@mantine/core"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
@@ -11,13 +12,13 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <>
-        <button
+        <Button
           onClick={async () => {
             await logoutMutation()
           }}
         >
           Logout
-        </button>
+        </Button>
         <div>
           User id: <code>{currentUser.id}</code>
           <br />
