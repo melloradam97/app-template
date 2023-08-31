@@ -5,7 +5,8 @@
     "dev": "blitz dev",
     "build": "blitz build",
     "start": "blitz start",
-    "studio": "blitz prisma studio"
+    "studio": "BROWSER=none blitz prisma studio",
+    "migrate": "blitz prisma migrate dev"
   },
   "prisma": {
     "schema": "db/schema.prisma"
@@ -28,12 +29,12 @@
     "@mantine/hooks": "^6.0.19",
     "@mantine/next": "^6.0.19",
     "@mantine/prism": "^6.0.19",
-    "@prisma/client": "4.6.1",
+    "@prisma/client": "4.15.0",
     "@tabler/icons-react": "^2.32.0",
     "blitz": "2.0.0-beta.32",
     "mantine-layout-components": "^0.1.2",
     "next": "13.4.9",
-    "prisma": "4.6.1",
+    "prisma": "4.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.45.4",

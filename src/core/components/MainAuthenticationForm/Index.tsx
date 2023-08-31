@@ -92,10 +92,10 @@ export function AuthenticationForm(props: PaperProps) {
         <Stack>
           {type === "register" && (
             <TextInput
+              withAsterisk
               label="Name"
               placeholder="Your name"
-              value={form.values.name}
-              onChange={(event) => form.setFieldValue("name", event.currentTarget.value)}
+              {...form.getInputProps("name")}
               radius="md"
             />
           )}

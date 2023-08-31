@@ -1,15 +1,21 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
 import { BlitzLayout, Routes } from "@blitzjs/next"
-import { AppShell, Navbar, Header, Text, Footer, Anchor } from "@mantine/core"
+import { AppShell, Navbar, Header, Text, Footer, Anchor, Button } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
+import { useMutation } from "@blitzjs/rpc"
+import logout from "@/features/auth/mutations/logout"
+import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
   children,
 }) => {
+  const [logoutMutation] = useMutation(logout)
   const thisYear = new Date().getFullYear()
+
+  const user = useCurrentUser()
 
   return (
     <>
@@ -21,8 +27,8 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
         padding="md"
         // navbar={<Navbar width={{ base: 300 }} height={500} p="xs"></Navbar>}
         header={
-          <Header height={45} p="xs">
-            <Horizontal fullH>
+          <Header height={55} p="xs">
+            <Horizontal fullH spaceBetween>
               <Anchor
                 underline={false}
                 color="gray.3"
@@ -32,6 +38,20 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
               >
                 Eventio{" "}
               </Anchor>
+              {user && (
+                <Horizontal>
+                  <Text>{user.name}</Text>
+                  <Button
+                    size="xs"
+                    variant="light"
+                    onClick={async () => {
+                      await logoutMutation()
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </Horizontal>
+              )}
             </Horizontal>
           </Header>
         }
