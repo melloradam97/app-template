@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "blitz dev",
-    "build": "blitz prisma migrate deploy && blitz prisma generate && blitz build",
+    "build": "npm install blitz prisma migrate deploy && npm install blitz prisma generate && npm install blitz build",
     "start": "blitz start",
     "studio": "BROWSER=none blitz prisma studio",
     "migrate": "blitz prisma migrate dev"
