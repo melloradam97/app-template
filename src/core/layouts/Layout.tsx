@@ -43,7 +43,9 @@ const Layout: React.FC<{
               </Anchor>
               {user && (
                 <Horizontal>
-                  <Text>{user.name}</Text>
+                  <Link href={Routes.EditProfilePage()}>
+                    <Text>{user.name}</Text>
+                  </Link>
                   <Button
                     size="xs"
                     variant="light"
