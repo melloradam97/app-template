@@ -6,15 +6,7 @@ import { Vertical } from "mantine-layout-components"
 
 const Home: BlitzPage = () => {
   const currentUser = useCurrentUser()
-  return (
-    <Layout title="Home">
-      {!currentUser && (
-        <Vertical center fullH fullW>
-          <AuthenticationForm />
-        </Vertical>
-      )}
-    </Layout>
-  )
+  return <Layout title="Home">{!currentUser && <AuthenticationForm />}</Layout>
 }
 
 export default Home

@@ -2,6 +2,7 @@ import { Button, ButtonProps, Group } from "@mantine/core"
 import { GithubIcon, DiscordIcon, TwitterIcon } from "@mantine/ds"
 import { GoogleIcon } from "./GoogleIcon"
 import { FacebookIcon } from "./FacebookIcon"
+import { notifications } from "@mantine/notifications"
 
 export function GoogleButton(props: ButtonProps) {
   return <Button leftIcon={<GoogleIcon />} variant="default" color="gray" {...props} />

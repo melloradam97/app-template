@@ -1,20 +1,23 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
-import { BlitzLayout, Routes } from "@blitzjs/next"
-import { AppShell, Navbar, Header, Text, Footer, Anchor, Button } from "@mantine/core"
+import { ErrorBoundary, Routes } from "@blitzjs/next"
+import { AppShell, Header, Text, Footer, Anchor, Button, Loader } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
 import { useMutation } from "@blitzjs/rpc"
 import logout from "@/features/auth/mutations/logout"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
+import RootErrorFallback from "../components/RootErrorFallback"
+import { useRouter } from "next/router"
 
-const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
-  title,
-  children,
-}) => {
+const Layout: React.FC<{
+  title?: string
+  children: React.ReactNode
+}> = ({ title, children }) => {
   const [logoutMutation] = useMutation(logout)
   const thisYear = new Date().getFullYear()
 
+  const router = useRouter()
   const user = useCurrentUser()
 
   return (
@@ -46,6 +49,7 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
                     variant="light"
                     onClick={async () => {
                       await logoutMutation()
+                      router.push(Routes.Home())
                     }}
                   >
                     Logout
@@ -74,7 +78,17 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
         })}
       >
         <Vertical fullH fullW>
-          <Suspense fallback="Loading...">{children}</Suspense>
+          <ErrorBoundary resetKeys={[user]} FallbackComponent={RootErrorFallback}>
+            <Suspense
+              fallback={
+                <Vertical center fullH fullW>
+                  <Loader />
+                </Vertical>
+              }
+            >
+              {children}
+            </Suspense>
+          </ErrorBoundary>
         </Vertical>
       </AppShell>
     </>
