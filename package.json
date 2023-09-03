@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "blitz dev",
     "email": "cd email/react-email && yarn dev --port 3009",
-    "build": "yarn blitz prisma migrate deploy && yarn blitz prisma generate && yarn blitz build",
+    "email-install-dependencies": "cd email/react-email && yarn install",
+    "build": "yarn blitz prisma migrate deploy && yarn blitz prisma generate && yarn email-install-dependencies && yarn blitz build",
     "start": "blitz start",
     "studio": "BROWSER=none blitz prisma studio",
     "migrate": "blitz prisma migrate dev",
