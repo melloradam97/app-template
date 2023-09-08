@@ -1,7 +1,9 @@
 import { Button, TextInput, Textarea } from "@mantine/core"
+
 import { Form, UseFormReturnType } from "@mantine/form"
 import { Vertical } from "mantine-layout-components"
 import { UpdateProfileInputType } from "../schemas"
+import UploadThingFileInput from "@/core/components/UploadThingFileInput"
 
 const EditProfileForm: React.FC<{
   form: UseFormReturnType<UpdateProfileInputType>
@@ -35,6 +37,10 @@ const EditProfileForm: React.FC<{
           {...form.getInputProps("bio")}
           radius="md"
         />
+
+        <UploadThingFileInput form={form} name="avatarImageKey" label="Profile picture" />
+        <UploadThingFileInput form={form} name="coverImageKey" label="Cover image" />
+
         <Button
           disabled={!form.isValid()}
           loading={isSubmitting}

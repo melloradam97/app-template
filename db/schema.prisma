@@ -20,8 +20,10 @@ model User {
   role           String    @default("USER")
   emailVerified  DateTime?
 
-  username String? @unique
-  bio      String?
+  username       String? @unique
+  bio            String?
+  avatarImageKey String?
+  coverImageKey  String?
 
   tokens   Token[]
   sessions Session[]

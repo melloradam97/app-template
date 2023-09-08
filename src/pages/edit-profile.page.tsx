@@ -21,6 +21,8 @@ const EditProfilePage = () => {
       name: data?.name || "",
       username: data?.username || "",
       bio: data?.bio || "",
+      avatarImageKey: data?.avatarImageKey || "",
+      coverImageKey: data?.coverImageKey || "",
     },
     validate: zodResolver(UpdateProfileInput),
     validateInputOnBlur: true,

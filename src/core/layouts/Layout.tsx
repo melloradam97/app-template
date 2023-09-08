@@ -1,7 +1,7 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
 import { ErrorBoundary, Routes } from "@blitzjs/next"
-import { AppShell, Header, Text, Footer, Anchor, Button, Loader } from "@mantine/core"
+import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Avatar } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
 import { useMutation } from "@blitzjs/rpc"
@@ -10,6 +10,7 @@ import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import RootErrorFallback from "../components/RootErrorFallback"
 import { useRouter } from "next/router"
 import Conditional from "conditional-wrap"
+import UserAvatar from "../components/UserAvatar"
 
 const Layout: React.FC<{
   title?: string
@@ -54,7 +55,10 @@ const Layout: React.FC<{
                       )
                     }}
                   >
-                    <Text>{user.name}</Text>
+                    <Horizontal>
+                      <UserAvatar name={user.name} avatarImageKey={user.avatarImageKey} />
+                      <Text>{user.name}</Text>
+                    </Horizontal>
                   </Conditional>
                   <Button
                     size="xs"

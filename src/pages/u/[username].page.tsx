@@ -2,13 +2,13 @@ import Layout from "@/core/layouts/Layout"
 
 import { IconAlertCircle } from "@tabler/icons-react"
 import { useDisclosure } from "@mantine/hooks"
-import { Modal, Button, Group, Text, TextInput, Textarea, Box, Alert } from "@mantine/core"
+import { Modal, Button, Group, Text, TextInput, Textarea, Box, Alert, Image } from "@mantine/core"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import getUserForProfile from "@/features/users/queries/getUserForProfile"
 import { useStringParam } from "@/utils/utils"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import { Vertical } from "mantine-layout-components"
-import { Form, useForm, zodResolver } from "@mantine/form"
+import { useForm, zodResolver } from "@mantine/form"
 import updateProfile from "@/features/users/mutations/updateProfile"
 import { UpdateProfileInput, UpdateProfileInputType } from "@/features/users/schemas"
 import { notifications } from "@mantine/notifications"
@@ -16,6 +16,7 @@ import { useRouter } from "next/router"
 import { Routes } from "@blitzjs/next"
 import EditProfileForm from "@/features/users/forms/EditProfileForm"
 import sendVerificationEmail from "@/features/auth/mutations/sendVerificationEmail"
+import { getUploadthingUrl } from "@/utils/image-utils"
 
 const UsernamePage = () => {
   const router = useRouter()
@@ -40,6 +41,8 @@ const UsernamePage = () => {
       name: user?.name || "",
       username: user?.username || "",
       bio: user?.bio || "",
+      avatarImageKey: user?.avatarImageKey || "",
+      coverImageKey: user?.coverImageKey || "",
     },
     validate: zodResolver(UpdateProfileInput),
     validateInputOnBlur: true,
@@ -125,6 +128,7 @@ const UsernamePage = () => {
               Edit profile
             </Button>
           )}
+          <Image width="300px" src={getUploadthingUrl(user.coverImageKey)} />
           <Text>Hello {username}</Text>
           <Text>{user.bio}</Text>
         </Vertical>
