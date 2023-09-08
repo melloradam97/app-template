@@ -1,4 +1,3 @@
-import { APP_NAME } from "@/config"
 import {
   Body,
   Button,
@@ -26,10 +25,10 @@ const defaultProps = {
 export const Welcome: React.FC<{
   props: {
     name: string | null
-    emailVerifyUrl: string | null
+    emailVerifyUrl: string
   }
 }> = ({ props = defaultProps }) => {
-  const { name } = props
+  const { name, emailVerifyUrl } = props
 
   const welcomeMessage = name ? `Hey ${name},` : "Hey,"
 
@@ -43,7 +42,7 @@ export const Welcome: React.FC<{
             <Img src={`${baseUrl}/images/logo.png`} width="49" height="21" alt="Stripe" />
             <Hr style={hr} />
             <Text style={paragraph}>{welcomeMessage} welcome to our platform!</Text>
-            <Button pX={10} pY={10} style={button} href="https://dashboard.stripe.com/login">
+            <Button pX={10} pY={10} style={button} href={emailVerifyUrl}>
               Click here to verify your account
             </Button>
             <Hr style={hr} />

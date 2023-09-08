@@ -110,7 +110,8 @@ const UsernamePage = () => {
                     </Button>
                   </>
                 )}
-                {isSendingEmail && (
+
+                {isSuccess && (
                   <Text>
                     The email has been sent and should arrive in the next few minutes. Please be
                     patient and check your spam folder.

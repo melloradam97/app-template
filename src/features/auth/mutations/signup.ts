@@ -7,6 +7,7 @@ import { PrismaError } from "@/utils/blitz-utils"
 import { sendEmail } from "email/sendEmail"
 import React from "react"
 import Welcome from "email/react-email/emails/welcome"
+import { getEmailVerifyLink } from "./sendVerificationEmail"
 
 export default resolver.pipe(resolver.zod(SignupInput), async ({ email, password, name }, ctx) => {
   const hashedPassword = await SecurePassword.hash(password.trim())
@@ -18,12 +19,17 @@ export default resolver.pipe(resolver.zod(SignupInput), async ({ email, password
     })
 
     if (user) {
+      const emailVerifyUrl = await getEmailVerifyLink({
+        userId: user.id,
+        userEmail: user.email,
+      })
       await sendEmail({
         to: user.email,
         subject: "Welcome to Eventio",
         react: React.createElement(Welcome, {
           props: {
             name: user.name,
+            emailVerifyUrl,
           },
         }),
       })

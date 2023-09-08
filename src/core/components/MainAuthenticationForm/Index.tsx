@@ -9,7 +9,6 @@ import {
   PaperProps,
   Button,
   Divider,
-  Checkbox,
   Anchor,
   Stack,
   Box,
@@ -27,7 +26,7 @@ import { Routes } from "@blitzjs/next"
 type SignupFormType = z.infer<typeof SignupInput>
 
 export function AuthenticationForm(props: PaperProps) {
-  const [type, toggle] = useToggle(["login", "register"])
+  const [type, toggle] = useToggle(["login", "signup"])
   const [$login, { isLoading: isLoggingIn }] = useMutation(login)
   const [$signup, { isLoading: isSigningUp }] = useMutation(signup)
 
@@ -62,7 +61,7 @@ export function AuthenticationForm(props: PaperProps) {
           })}
         >
           <Stack>
-            {type === "register" && (
+            {type === "signup" && (
               <TextInput
                 withAsterisk
                 label="Name"
@@ -111,9 +110,9 @@ export function AuthenticationForm(props: PaperProps) {
               onClick={() => toggle()}
               size="xs"
             >
-              {type === "register"
+              {type === "signup"
                 ? "Already have an account? Login"
-                : "Don't have an account? Register"}
+                : "Don't have an account? Signup"}
             </Anchor>
             <Button disabled={!form.isValid()} loading={loading} type="submit" radius="xl">
               {upperFirst(type)}

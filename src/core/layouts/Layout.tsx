@@ -9,6 +9,7 @@ import logout from "@/features/auth/mutations/logout"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import RootErrorFallback from "../components/RootErrorFallback"
 import { useRouter } from "next/router"
+import Conditional from "conditional-wrap"
 
 const Layout: React.FC<{
   title?: string
@@ -43,13 +44,18 @@ const Layout: React.FC<{
               </Anchor>
               {user && (
                 <Horizontal>
-                  <Link
-                    href={Routes.UsernamePage({
-                      username: user.username as string,
-                    })}
+                  <Conditional
+                    condition={!!user.username}
+                    wrap={(children) => {
+                      return (
+                        <Link href={Routes.UsernamePage({ username: user.username as string })}>
+                          {children}
+                        </Link>
+                      )
+                    }}
                   >
                     <Text>{user.name}</Text>
-                  </Link>
+                  </Conditional>
                   <Button
                     size="xs"
                     variant="light"
