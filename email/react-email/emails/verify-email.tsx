@@ -1,4 +1,3 @@
-import { APP_NAME } from "@/config"
 import {
   Body,
   Button,
@@ -19,31 +18,30 @@ const baseUrl = process.env.VERCEL_URL
   : "http://localhost:3000"
 
 const defaultProps = {
-  name: "Test User",
   emailVerifyUrl: "Test Url",
 }
 
-export const Welcome: React.FC<{
+export const VerifyEmail: React.FC<{
   props: {
-    name: string | null
-    emailVerifyUrl: string | null
+    emailVerifyUrl: string
   }
 }> = ({ props = defaultProps }) => {
-  const { name } = props
-
-  const welcomeMessage = name ? `Hey ${name},` : "Hey,"
+  const { emailVerifyUrl } = props
 
   return (
     <Html>
       <Head />
-      <Preview>Welcome to Eventio</Preview>
+      <Preview>Please verify your email for Eventio</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
             <Img src={`${baseUrl}/images/logo.png`} width="49" height="21" alt="Stripe" />
             <Hr style={hr} />
-            <Text style={paragraph}>{welcomeMessage} welcome to our platform!</Text>
-            <Button pX={10} pY={10} style={button} href="https://dashboard.stripe.com/login">
+            <Text style={paragraph}>
+              Hello, you requested this email for verifying your account. If you didn't request this
+              email, please ignore it.
+            </Text>
+            <Button pX={10} pY={10} style={button} href={emailVerifyUrl}>
               Click here to verify your account
             </Button>
             <Hr style={hr} />
@@ -57,7 +55,7 @@ export const Welcome: React.FC<{
   )
 }
 
-export default Welcome
+export default VerifyEmail
 
 const main = {
   backgroundColor: "#f6f9fc",

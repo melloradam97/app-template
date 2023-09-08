@@ -1,6 +1,8 @@
 import Layout from "@/core/layouts/Layout"
+
+import { IconAlertCircle } from "@tabler/icons-react"
 import { useDisclosure } from "@mantine/hooks"
-import { Modal, Button, Group, Text, TextInput, Textarea, Box } from "@mantine/core"
+import { Modal, Button, Group, Text, TextInput, Textarea, Box, Alert } from "@mantine/core"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import getUserForProfile from "@/features/users/queries/getUserForProfile"
 import { useStringParam } from "@/utils/utils"
@@ -13,11 +15,14 @@ import { notifications } from "@mantine/notifications"
 import { useRouter } from "next/router"
 import { Routes } from "@blitzjs/next"
 import EditProfileForm from "@/features/users/forms/EditProfileForm"
+import sendVerificationEmail from "@/features/auth/mutations/sendVerificationEmail"
 
 const UsernamePage = () => {
   const router = useRouter()
   const username = useStringParam("username")
   const [$updateProfile] = useMutation(updateProfile)
+  const [$sendVerificationEmail, { isLoading: isSendingEmail, isSuccess }] =
+    useMutation(sendVerificationEmail)
   const [opened, { open, close }] = useDisclosure(false)
 
   const [user, { isLoading }] = useQuery(
@@ -74,6 +79,46 @@ const UsernamePage = () => {
 
       <Layout title="Username">
         <Vertical>
+          {isOwner && !currentUser?.emailVerified && (
+            <Alert
+              variant="outline"
+              icon={<IconAlertCircle size="1rem" />}
+              title="Uh oh!"
+              color="red"
+            >
+              <Vertical>
+                {!isSuccess && (
+                  <>
+                    <Text>
+                      Your email is not verified. Please check your inbox for a verification email.
+                    </Text>
+                    <Button
+                      loading={isSendingEmail}
+                      onClick={async () => {
+                        await $sendVerificationEmail()
+                        notifications.show({
+                          color: "green",
+                          title: "Success",
+                          message: "Verification email sent successfully",
+                        })
+                      }}
+                      size="xs"
+                      variant="light"
+                      color="red"
+                    >
+                      Resend verification email
+                    </Button>
+                  </>
+                )}
+                {isSendingEmail && (
+                  <Text>
+                    The email has been sent and should arrive in the next few minutes. Please be
+                    patient and check your spam folder.
+                  </Text>
+                )}
+              </Vertical>
+            </Alert>
+          )}
           {isOwner && (
             <Button onClick={open} variant="outline" color="blue">
               Edit profile

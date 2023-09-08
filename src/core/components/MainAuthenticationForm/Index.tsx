@@ -12,6 +12,7 @@ import {
   Checkbox,
   Anchor,
   Stack,
+  Box,
 } from "@mantine/core"
 import { GoogleButton, TwitterButton } from "./Icons/SocialButtons"
 import { useMutation } from "@blitzjs/rpc"
@@ -20,6 +21,8 @@ import signup from "@/features/auth/mutations/signup"
 import { Vertical } from "mantine-layout-components"
 import { SignupInput } from "@/features/auth/schemas"
 import { z } from "zod"
+import Link from "next/link"
+import { Routes } from "@blitzjs/next"
 
 type SignupFormType = z.infer<typeof SignupInput>
 
@@ -77,13 +80,27 @@ export function AuthenticationForm(props: PaperProps) {
               radius="md"
             />
 
-            <PasswordInput
-              required
-              label="Password"
-              placeholder="Your password"
-              {...form.getInputProps("password")}
-              radius="md"
-            />
+            <Vertical fullW spacing="3px">
+              <PasswordInput
+                w="100%"
+                required
+                label="Password"
+                placeholder="Your password"
+                {...form.getInputProps("password")}
+                radius="md"
+              />
+              <Box
+                sx={{
+                  alignSelf: "flex-end",
+                }}
+                fz="xs"
+                color="dimmed"
+                component={Link}
+                href={Routes.ForgotPasswordPage()}
+              >
+                Forgot password?
+              </Box>
+            </Vertical>
           </Stack>
 
           <Group position="apart" mt="xl">

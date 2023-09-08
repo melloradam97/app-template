@@ -1,4 +1,3 @@
-import { APP_NAME } from "@/config"
 import {
   Body,
   Button,
@@ -19,32 +18,31 @@ const baseUrl = process.env.VERCEL_URL
   : "http://localhost:3000"
 
 const defaultProps = {
-  name: "Test User",
-  emailVerifyUrl: "Test Url",
+  resetPasswordUrl: "http://localhost:3000",
 }
 
-export const Welcome: React.FC<{
+export const ResetPassword: React.FC<{
   props: {
-    name: string | null
-    emailVerifyUrl: string | null
+    resetPasswordUrl: string
   }
 }> = ({ props = defaultProps }) => {
-  const { name } = props
-
-  const welcomeMessage = name ? `Hey ${name},` : "Hey,"
+  const { resetPasswordUrl } = props
 
   return (
     <Html>
       <Head />
-      <Preview>Welcome to Eventio</Preview>
+      <Preview>Reset your password for Eventio</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
             <Img src={`${baseUrl}/images/logo.png`} width="49" height="21" alt="Stripe" />
             <Hr style={hr} />
-            <Text style={paragraph}>{welcomeMessage} welcome to our platform!</Text>
-            <Button pX={10} pY={10} style={button} href="https://dashboard.stripe.com/login">
-              Click here to verify your account
+            <Text style={paragraph}>
+              Hello, you requested this email for resetting your password. If you didn't request
+              this email, please ignore it.
+            </Text>
+            <Button pX={10} pY={10} style={button} href={resetPasswordUrl}>
+              Click here to reset your password
             </Button>
             <Hr style={hr} />
             <Text style={paragraph}>— The Eventio team</Text>
@@ -57,7 +55,7 @@ export const Welcome: React.FC<{
   )
 }
 
-export default Welcome
+export default ResetPassword
 
 const main = {
   backgroundColor: "#f6f9fc",

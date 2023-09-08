@@ -11,13 +11,14 @@ generator client {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id             String    @id @default(uuid())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
   name           String?
-  email          String   @unique
+  email          String    @unique
   hashedPassword String?
-  role           String   @default("USER")
+  role           String    @default("USER")
+  emailVerified  DateTime?
 
   username String? @unique
   bio      String?
@@ -58,4 +59,5 @@ model Token {
 
 enum TokenType {
   RESET_PASSWORD
+  VERIFY_EMAIL
 }
