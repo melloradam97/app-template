@@ -1,7 +1,7 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
 import { ErrorBoundary, Routes } from "@blitzjs/next"
-import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Avatar } from "@mantine/core"
+import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Modal } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
 import { useMutation } from "@blitzjs/rpc"
@@ -11,6 +11,8 @@ import RootErrorFallback from "../components/RootErrorFallback"
 import { useRouter } from "next/router"
 import Conditional from "conditional-wrap"
 import UserAvatar from "../components/UserAvatar"
+import UserProfileProgress from "../components/Header/UserProfileProgress"
+import OnboardingWizard from "../components/OnboardingWizard"
 
 const Layout: React.FC<{
   title?: string
@@ -58,6 +60,7 @@ const Layout: React.FC<{
                     <Horizontal>
                       <UserAvatar name={user.name} avatarImageKey={user.avatarImageKey} />
                       <Text>{user.name}</Text>
+                      <UserProfileProgress />
                     </Horizontal>
                   </Conditional>
                   <Button
@@ -102,6 +105,18 @@ const Layout: React.FC<{
                 </Vertical>
               }
             >
+              <Modal
+                size="xl"
+                centered={true}
+                closeOnClickOutside={false}
+                closeOnEscape={false}
+                withCloseButton={false}
+                title="Onboarding modal"
+                opened={!user?.onboarded}
+                onClose={() => {}}
+              >
+                <OnboardingWizard />
+              </Modal>
               {children}
             </Suspense>
           </ErrorBoundary>

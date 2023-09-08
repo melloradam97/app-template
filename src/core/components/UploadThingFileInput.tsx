@@ -62,7 +62,6 @@ const UploadThingFileInput: React.FC<{
           placeholder={label}
           disabled={loading}
           onChange={(files) => {
-            console.log("Files: ", files)
             setLoading(true)
             if (files) {
               startUpload([files])

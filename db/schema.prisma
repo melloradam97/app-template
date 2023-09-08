@@ -19,6 +19,7 @@ model User {
   hashedPassword String?
   role           String    @default("USER")
   emailVerified  DateTime?
+  onboarded      Boolean   @default(true)
 
   username       String? @unique
   bio            String?
