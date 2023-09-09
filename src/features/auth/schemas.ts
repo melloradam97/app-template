@@ -47,3 +47,16 @@ export const ResetPasswordInput = z
   })
 
 export type ResetPasswordInputType = z.infer<typeof ResetPasswordInput>
+
+export const ChangePasswordInput = z
+  .object({
+    currentPassword: password,
+    newPassword: password,
+    newPasswordConfirmation: password,
+  })
+  .refine((data) => data.newPassword === data.newPasswordConfirmation, {
+    message: "Passwords don't match",
+    path: ["newPasswordConfirmation"],
+  })
+
+export type ChangePasswordInputType = z.infer<typeof ChangePasswordInput>

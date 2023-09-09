@@ -15,15 +15,14 @@ import UserProfileProgress from "../components/Header/UserProfileProgress"
 import OnboardingWizard from "../components/OnboardingWizard"
 import { openContextModal } from "@mantine/modals"
 import { GlobalModal } from "@/modals"
+import DarkLightToggle from "../components/DarkLightToggle"
+import UserHeaderMenu from "../components/Header/UserHeaderMenu"
 
 const Layout: React.FC<{
   title?: string
   children: React.ReactNode
 }> = ({ title, children }) => {
-  const [logoutMutation] = useMutation(logout)
   const thisYear = new Date().getFullYear()
-
-  const router = useRouter()
   const user = useCurrentUser()
 
   return (
@@ -38,30 +37,13 @@ const Layout: React.FC<{
         header={
           <Header height={55} p="xs">
             <Horizontal fullH spaceBetween>
-              <Anchor
-                underline={false}
-                color="gray.3"
-                component={Link}
-                href={Routes.Home()}
-                fw="bold"
-              >
+              <Anchor underline={false} component={Link} href={Routes.Home()} fw="bold">
                 Eventio{" "}
               </Anchor>
               {user && (
                 <Horizontal>
-                  <Conditional
-                    condition={!!user.username}
-                    wrap={(children) => {
-                      return (
-                        <Link href={Routes.UsernamePage({ username: user.username as string })}>
-                          {children}
-                        </Link>
-                      )
-                    }}
-                  >
-                    <UserAvatar name={user.name} avatarImageKey={user.avatarImageKey} />
-                  </Conditional>
-                  <Text>{user.name}</Text>
+                  <UserHeaderMenu user={user} />
+
                   <Badge
                     onClick={() => {
                       openContextModal({
@@ -77,16 +59,8 @@ const Layout: React.FC<{
                     Pro
                   </Badge>
                   <UserProfileProgress />
-                  <Button
-                    size="xs"
-                    variant="light"
-                    onClick={async () => {
-                      await logoutMutation()
-                      router.push(Routes.Home())
-                    }}
-                  >
-                    Logout
-                  </Button>
+
+                  {/* <DarkLightToggle /> */}
                 </Horizontal>
               )}
             </Horizontal>
@@ -96,9 +70,7 @@ const Layout: React.FC<{
           <Footer height={45} p="xs">
             <Horizontal fullH>
               <Horizontal fullH fullW center>
-                <Text fz="xs" color="dimmed">
-                  copyright {thisYear}
-                </Text>
+                <Text fz="xs">copyright {thisYear}</Text>
               </Horizontal>
             </Horizontal>
           </Footer>
@@ -126,7 +98,7 @@ const Layout: React.FC<{
                 closeOnEscape={false}
                 withCloseButton={false}
                 title="Onboarding modal"
-                opened={!user?.onboarded}
+                opened={!!user && !user?.onboarded}
                 onClose={() => {}}
               >
                 <OnboardingWizard />
