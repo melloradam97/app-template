@@ -1,7 +1,9 @@
 import FullPageLoader from "@/core/components/FullPageLoader"
 import RootErrorFallback from "@/core/components/RootErrorFallback"
+import { globalModals } from "@/modals"
 import { ErrorBoundary, AppProps } from "@blitzjs/next"
 import { MantineProvider } from "@mantine/core"
+import { ModalsProvider } from "@mantine/modals"
 import { Notifications } from "@mantine/notifications"
 import React, { Suspense } from "react"
 import { withBlitz } from "src/blitz-client"
@@ -18,11 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <Notifications />
-      <ErrorBoundary FallbackComponent={RootErrorFallback}>
-        <Suspense fallback={<FullPageLoader />}>
-          <Component {...pageProps} />
-        </Suspense>
-      </ErrorBoundary>
+      <ModalsProvider modals={globalModals}>
+        <ErrorBoundary FallbackComponent={RootErrorFallback}>
+          <Suspense fallback={<FullPageLoader />}>
+            <Component {...pageProps} />
+          </Suspense>
+        </ErrorBoundary>
+      </ModalsProvider>
     </MantineProvider>
   )
 }

@@ -1325,6 +1325,13 @@
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-6.0.19.tgz"
   integrity sha512-YkmuB6kmoenU1PVuE8tLBA+6RJIY9hIsGyIQG1yuPAy6SLWNFT8g2T9YvI/psqsUbVIYGaNEXg8zq42xbxnD8Q==
 
+"@mantine/modals@^6.0.20":
+  version "6.0.20"
+  resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-6.0.20.tgz#d061b376fc5ec90b3e0b86d2d6d92ba17f5e543f"
+  integrity sha512-KcAauiVPuXzqph19f3S5+y35QIW8T2zgGjZed7PV6Fc2kFlp6w96ofzU+I2XrOjNhCULb5wneZ5gfObf4hi2VQ==
+  dependencies:
+    "@mantine/utils" "6.0.20"
+
 "@mantine/next@^6.0.19":
   version "6.0.19"
   resolved "https://registry.npmjs.org/@mantine/next/-/next-6.0.19.tgz"
@@ -1369,6 +1376,11 @@
   version "6.0.19"
   resolved "https://registry.npmjs.org/@mantine/utils/-/utils-6.0.19.tgz"
   integrity sha512-duvtnaW1gDR2gnvUqnWhl6DMW7sN0HEWqS8Z/BbwaMi75U+Xp17Q72R9JtiIrxQbzsq+KvH9L9B/pxMVwbLirg==
+
+"@mantine/utils@6.0.20":
+  version "6.0.20"
+  resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-6.0.20.tgz#c331040c62050edf3a513f3cfb702f3170597c10"
+  integrity sha512-9vsSskPtFyfPW2DOad6brLl9x4MnZtlyhszyoZOyMgXf/vdQbThKhL6PpqUbmlalwQpnCObbkEwVydugeh2dyQ==
 
 "@mrleebo/prisma-ast@0.2.6":
   version "0.2.6"

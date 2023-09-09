@@ -1,7 +1,7 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
 import { ErrorBoundary, Routes } from "@blitzjs/next"
-import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Modal } from "@mantine/core"
+import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Modal, Badge } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
 import { useMutation } from "@blitzjs/rpc"
@@ -13,6 +13,8 @@ import Conditional from "conditional-wrap"
 import UserAvatar from "../components/UserAvatar"
 import UserProfileProgress from "../components/Header/UserProfileProgress"
 import OnboardingWizard from "../components/OnboardingWizard"
+import { openContextModal } from "@mantine/modals"
+import { GlobalModal } from "@/modals"
 
 const Layout: React.FC<{
   title?: string
@@ -57,12 +59,24 @@ const Layout: React.FC<{
                       )
                     }}
                   >
-                    <Horizontal>
-                      <UserAvatar name={user.name} avatarImageKey={user.avatarImageKey} />
-                      <Text>{user.name}</Text>
-                      <UserProfileProgress />
-                    </Horizontal>
+                    <UserAvatar name={user.name} avatarImageKey={user.avatarImageKey} />
                   </Conditional>
+                  <Text>{user.name}</Text>
+                  <Badge
+                    onClick={() => {
+                      openContextModal({
+                        modal: GlobalModal.becomePro,
+                        title: "Become pro",
+                        innerProps: {
+                          price: 95,
+                        },
+                      })
+                    }}
+                    color="red"
+                  >
+                    Pro
+                  </Badge>
+                  <UserProfileProgress />
                   <Button
                     size="xs"
                     variant="light"
