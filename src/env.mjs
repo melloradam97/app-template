@@ -8,7 +8,6 @@ export const env = createEnv({
     NODEMAILER_LOCAL_PASS: z.string().optional(),
     UPLOADTHING_SECRET: z.string(),
     UPLOADTHING_APP_ID: z.string(),
-    PROD_URL: z.string(),
   },
   client: {},
   runtimeEnv: {
@@ -17,6 +16,5 @@ export const env = createEnv({
     NODEMAILER_LOCAL_PASS: process.env.NODEMAILER_LOCAL_PASS,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
-    PROD_URL: process.env.PROD_URL,
   },
 })
