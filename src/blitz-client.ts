@@ -4,7 +4,7 @@ import { BlitzRpcPlugin, getQueryClient } from "@blitzjs/rpc"
 import { notifications } from "@mantine/notifications"
 
 export const authConfig = {
-  cookiePrefix: "eventio",
+  cookiePrefix: "APP_NAME",
 }
 
 export const { withBlitz } = setupBlitzClient({

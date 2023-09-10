@@ -1,22 +1,16 @@
 import Head from "next/head"
 import React, { Suspense } from "react"
 import { ErrorBoundary, Routes } from "@blitzjs/next"
-import { AppShell, Header, Text, Footer, Anchor, Button, Loader, Modal, Badge } from "@mantine/core"
+import { AppShell, Header, Text, Footer, Anchor, Loader, Modal } from "@mantine/core"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import Link from "next/link"
-import { useMutation } from "@blitzjs/rpc"
-import logout from "@/features/auth/mutations/logout"
+
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import RootErrorFallback from "../components/RootErrorFallback"
-import { useRouter } from "next/router"
-import Conditional from "conditional-wrap"
-import UserAvatar from "../components/UserAvatar"
 import UserProfileProgress from "../components/Header/UserProfileProgress"
 import OnboardingWizard from "../components/OnboardingWizard"
-import { openContextModal } from "@mantine/modals"
-import { GlobalModal } from "@/modals"
-import DarkLightToggle from "../components/DarkLightToggle"
 import UserHeaderMenu from "../components/Header/UserHeaderMenu"
+import { APP_NAME } from "@/config"
 
 const Layout: React.FC<{
   title?: string
@@ -28,39 +22,21 @@ const Layout: React.FC<{
   return (
     <>
       <Head>
-        <title>{title || "eventio"}</title>
+        <title>{title || "APP NAME"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell
         padding="md"
-        // navbar={<Navbar width={{ base: 300 }} height={500} p="xs"></Navbar>}
         header={
           <Header height={55} p="xs">
             <Horizontal fullH spaceBetween>
               <Anchor underline={false} component={Link} href={Routes.Home()} fw="bold">
-                Eventio{" "}
+                {APP_NAME}
               </Anchor>
               {user && (
                 <Horizontal>
                   <UserHeaderMenu user={user} />
-
-                  <Badge
-                    onClick={() => {
-                      openContextModal({
-                        modal: GlobalModal.becomePro,
-                        title: "Become pro",
-                        innerProps: {
-                          price: 95,
-                        },
-                      })
-                    }}
-                    color="red"
-                  >
-                    Pro
-                  </Badge>
                   <UserProfileProgress />
-
-                  {/* <DarkLightToggle /> */}
                 </Horizontal>
               )}
             </Horizontal>
@@ -97,7 +73,7 @@ const Layout: React.FC<{
                 closeOnClickOutside={false}
                 closeOnEscape={false}
                 withCloseButton={false}
-                title="Onboarding modal"
+                title={`Welcome to ${APP_NAME}`}
                 opened={!!user && !user?.onboarded}
                 onClose={() => {}}
               >

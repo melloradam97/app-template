@@ -38,18 +38,18 @@ export function AuthenticationForm(props: PaperProps) {
   const loading = isLoggingIn || isSigningUp
 
   return (
-    <Vertical mih="100vh" center fullH fullW>
+    <Vertical center fullH fullW>
       <Paper radius="md" p="xl" withBorder {...props}>
         <Text size="lg" weight={500}>
-          Welcome to Mantine, {type} with
+          Starter Template
         </Text>
 
-        <Group grow mb="md" mt="md">
+        {/* <Group grow mb="md" mt="md">
           <GoogleButton radius="xl">Google</GoogleButton>
           <TwitterButton radius="xl">Twitter</TwitterButton>
         </Group>
 
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <Divider label="Or continue with email" labelPosition="center" my="lg" /> */}
 
         <form
           onSubmit={form.onSubmit((values) => {
@@ -74,7 +74,7 @@ export function AuthenticationForm(props: PaperProps) {
             <TextInput
               required
               label="Email"
-              placeholder="hello@mantine.dev"
+              placeholder="email@email.com"
               {...form.getInputProps("email")}
               radius="md"
             />

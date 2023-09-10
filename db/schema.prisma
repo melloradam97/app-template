@@ -24,7 +24,6 @@ model User {
   username       String? @unique
   bio            String?
   avatarImageKey String?
-  coverImageKey  String?
 
   tokens   Token[]
   sessions Session[]

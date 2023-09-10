@@ -16,13 +16,14 @@ function OnboardingWizard() {
     <>
       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
         <Stepper.Step label="First step" description="Create an account">
-          Step 1 content: Create an account
+          Create an account (we think you may have done this already!)
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Verify email">
-          Step 2 content: Verify email
+          Next you'll want to verify your email. You should have one already but if you need to send
+          it again you can do that on your profile page. Make sure to check your spam folder!
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Get full access">
-          Step 3 content: Get full access
+          After that you're good to go! You'll have full access to the site.
         </Stepper.Step>
         <Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
       </Stepper>

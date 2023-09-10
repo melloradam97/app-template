@@ -19,7 +19,6 @@ export default resolver.pipe(
         username: true,
         bio: true,
         avatarImageKey: true,
-        coverImageKey: true,
       },
     })
 

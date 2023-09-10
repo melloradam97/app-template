@@ -37,15 +37,8 @@ const EditProfileForm: React.FC<{
         />
 
         <UploadThingFileInput form={form} name="avatarImageKey" label="Profile picture" />
-        <UploadThingFileInput form={form} name="coverImageKey" label="Cover image" />
 
-        <Button
-          disabled={!form.isValid()}
-          loading={isSubmitting}
-          type="submit"
-          variant="outline"
-          color="blue"
-        >
+        <Button disabled={!form.isValid()} loading={isSubmitting} type="submit">
           Save
         </Button>
       </Vertical>

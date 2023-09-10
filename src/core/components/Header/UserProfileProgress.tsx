@@ -26,10 +26,6 @@ const UserProfileProgress = () => {
       key: "avatarImageKey",
       label: "Profile picture",
     },
-    {
-      key: "coverImageKey",
-      label: "Cover image",
-    },
   ]
 
   const existingKeys = keys.filter((key) => user[key.key])
