@@ -6,7 +6,6 @@ import {
   Hr,
   Html,
   Img,
-  Link,
   Preview,
   Section,
   Text,
@@ -31,7 +30,7 @@ export const ResetPassword: React.FC<{
   return (
     <Html>
       <Head />
-      <Preview>Reset your password for Eventio</Preview>
+      <Preview>Reset your password for APP NAME</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
@@ -45,9 +44,9 @@ export const ResetPassword: React.FC<{
               Click here to reset your password
             </Button>
             <Hr style={hr} />
-            <Text style={paragraph}>— The Eventio team</Text>
+            <Text style={paragraph}>— The APP NAME team</Text>
             <Hr style={hr} />
-            <Text style={footer}>Eventio, Some Random Address</Text>
+            <Text style={footer}>APP NAME, Some Random Address</Text>
           </Section>
         </Container>
       </Body>

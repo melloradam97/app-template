@@ -31,7 +31,7 @@ export default resolver.pipe(resolver.zod(SignupInput), async ({ email, password
       })
       await sendEmail({
         to: user.email,
-        subject: "Welcome to Eventio",
+        subject: "Welcome to APP NAME",
         react: React.createElement(Welcome, {
           props: {
             name: user.name,

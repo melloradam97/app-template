@@ -1,12 +1,6 @@
-import BecomeProModal from "./components/BecomeProModal"
+export enum GlobalModal {}
 
-export enum GlobalModal {
-  becomePro = "becomePro",
-}
-
-export const globalModals = {
-  [GlobalModal.becomePro]: BecomeProModal,
-}
+export const globalModals = {}
 
 declare module "@mantine/modals" {
   export interface MantineModalsOverride {

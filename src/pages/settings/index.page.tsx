@@ -31,7 +31,7 @@ const SettingsPage: BlitzPage = () => {
           </Tabs.Panel>
 
           <Tabs.Panel value="settings" pl="xs">
-            Settings tab content
+            Settings
           </Tabs.Panel>
         </Tabs>
       </Vertical>
