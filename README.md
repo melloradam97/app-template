@@ -14,9 +14,9 @@ Welcome to my custom project template! Designed to jumpstart my projects, I've c
 ## Supplementary Technologies 💼
 
 - **Nodemailer**: An efficient way to send emails from our applications.
-- **UploadThing**: *(You might want to add a brief description or its function here).*
-- **Resend**: *(You might want to add a brief description or its function here).*
-- **React-Email**: *(You might want to add a brief description or its function here).*
+- **UploadThing**: A super easy file upload library for React.
+- **Resend**: A library for sending emails.
+- **React-Email**: A library for building responsive HTML emails.
 
 ## Current Progress 🌱
 
