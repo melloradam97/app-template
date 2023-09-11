@@ -12,7 +12,7 @@ import { useRouter } from "next/router"
 
 const EditProfilePage = () => {
   const router = useRouter()
-  const [$updateProfile, { isLoading }] = useMutation(updateProfile)
+  const [$updateProfile, { isLoading, isSuccess }] = useMutation(updateProfile)
 
   const [data] = useQuery(getUserForEditingProfile, {})
 
@@ -34,15 +34,17 @@ const EditProfilePage = () => {
           form={form}
           onSubmit={async (values) => {
             $updateProfile(values)
-            const { username } = values
-            if (username) {
-              router.push(Routes.UsernamePage({ username }))
+            if (isSuccess) {
+              const { username } = values
+              if (username) {
+                router.push(Routes.UsernamePage({ username }))
+              }
+              notifications.show({
+                title: "Profile updated",
+                color: "green",
+                message: "Profile updated successfully",
+              })
             }
-            notifications.show({
-              title: "Profile updated",
-              color: "green",
-              message: "Profile updated successfully",
-            })
           }}
           isSubmitting={isLoading}
         />

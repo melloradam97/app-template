@@ -1,7 +1,6 @@
 import Layout from "src/core/layouts/Layout"
 import resetPassword from "@/features/auth/mutations/resetPassword"
 import { BlitzPage, Routes } from "@blitzjs/next"
-import { useRouter } from "next/router"
 import { useMutation } from "@blitzjs/rpc"
 import Link from "next/link"
 import { Button, PasswordInput, Text, TextInput, Title } from "@mantine/core"

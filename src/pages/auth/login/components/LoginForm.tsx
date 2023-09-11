@@ -1,4 +1,4 @@
-import { AuthenticationError, PromiseReturnType } from "blitz"
+import { PromiseReturnType } from "blitz"
 import Link from "next/link"
 import login from "@/features/auth/mutations/login"
 import { useMutation } from "@blitzjs/rpc"

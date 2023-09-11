@@ -6,11 +6,21 @@ export default resolver.pipe(
   resolver.zod(UpdateProfileInput),
   resolver.authorize(),
   async (Input, { session: { userId } }) => {
-    await db.user.update({
+    const user = await db.user.findFirst({
       where: {
-        id: userId,
+        username: Input.username,
       },
-      data: Input,
     })
+
+    if (user && user.id !== userId) {
+      throw new Error("Username is already taken")
+    } else {
+      await db.user.update({
+        where: {
+          id: userId,
+        },
+        data: Input,
+      })
+    }
   }
 )

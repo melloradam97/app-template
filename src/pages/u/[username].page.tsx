@@ -2,7 +2,7 @@ import Layout from "@/core/layouts/Layout"
 
 import { IconAlertCircle } from "@tabler/icons-react"
 import { useDisclosure } from "@mantine/hooks"
-import { Modal, Button, Text, Alert, Image } from "@mantine/core"
+import { Modal, Button, Text, Alert } from "@mantine/core"
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import getUserForProfile from "@/features/users/queries/getUserForProfile"
 import { useStringParam } from "@/utils/utils"
@@ -20,7 +20,7 @@ import sendVerificationEmail from "@/features/auth/mutations/sendVerificationEma
 const UsernamePage = () => {
   const router = useRouter()
   const username = useStringParam("username")
-  const [$updateProfile] = useMutation(updateProfile)
+  const [$updateProfile, { isSuccess: isUpdated }] = useMutation(updateProfile)
   const [$sendVerificationEmail, { isLoading: isSendingEmail, isSuccess }] =
     useMutation(sendVerificationEmail)
   const [opened, { open, close }] = useDisclosure(false)
@@ -62,17 +62,19 @@ const UsernamePage = () => {
           form={form}
           onSubmit={async (values) => {
             $updateProfile(values)
-            const { username } = values
-            if (username !== user.username) {
-              if (username) {
-                router.push(Routes.UsernamePage({ username }))
+            if (isUpdated) {
+              const { username } = values
+              if (username !== user.username) {
+                if (username) {
+                  router.push(Routes.UsernamePage({ username }))
+                }
               }
+              notifications.show({
+                title: "Profile updated",
+                color: "green",
+                message: "Profile updated successfully",
+              })
             }
-            notifications.show({
-              title: "Profile updated",
-              color: "green",
-              message: "Profile updated successfully",
-            })
           }}
           isSubmitting={isLoading}
         />
